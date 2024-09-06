@@ -1,0 +1,117 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: lightgray;
+}
+
+#title {
+    font-size: 30px;
+    height: 100%;
+    line-height: 40px;
+    text-align: center;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+#prev-month, 
+#next-month {
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#current-month {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+nav {
+    display: grid;
+}
+
+#month-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#youbi {
+    font-size: 20px;
+    display: flex;
+    justify-content: flex-start; /* 子要素を左寄せに配置 */
+    width: 107%; /* 親要素の幅を画面全体に設定 */
+    margin: 0; /* 親要素の左右の余白を削除 */
+    position: absolute; /* 親要素を絶対配置に */
+    left: 0; /* 画面の左端に固定 */
+    top: 33px; /* 必要に応じて上端に固定 */
+    padding-left: 55px;
+    padding-bottom: 20px;
+}
+
+#youbi > div {
+    flex: 1; /* 各子要素が均等に幅を占める */
+    text-align: left; /* テキストを左揃えに */
+}
+
+#calendar {
+    width: 100%;
+    height: 100%;
+    padding: 3px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    align-content: center;
+}
+
+.day {
+    font-size: 20px;
+    width: calc(100%/7-6px);
+    height: calc(100%/6-6px);
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px;
+    display: flex;
+    height: 100px;
+    float: left;
+}
+
+.sunday {
+    color: red;
+}
+
+.saturday {
+    color: blue;
+}
+
+.other-month {
+    opacity: 0.4;
+}
+
+.holiday {
+    background-color: #ffe4e1;
+    border-color: red;
+    color: red;
+}
+
+.holiday-text {
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+div.schedule-text {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center; /* 水平中央揃え */
+    align-items: center; /* 垂直中央揃え */
+    height: 100px; /* 必要に応じて高さを指定 */
+    unicode-bidi: isolate;
+    position: relative; /* StaticからRelativeに変更 */
+    left: 12%;
+}
