@@ -113,5 +113,5 @@ div.schedule-text {
     height: 100px; /* 必要に応じて高さを指定 */
     unicode-bidi: isolate;
     position: relative; /* StaticからRelativeに変更 */
-    left: -4%;
+    left: -2%;
 }

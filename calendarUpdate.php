@@ -1,45 +1,41 @@
 <?php
-    $retry_count = 10;
-    $retry_wait_ms = 10;
-    while(true){
-        try{
-            $pdo = new PDO('sqlite:calendar.db', '', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-            $pdo->beginTransaction();
-            setDatabase($pdo);
-            $result = true;
-            $pdo->commit();
-        }
-        catch(PDOException $e){
-            $pdo->rollBack();
-            $result = false;
-            print $e->getMessage();
-        }
-        if(!$result && $retry_count > 0){
-            usleep($retry_wait_ms * 1000);
-            $retry_count--;
-        }
-        else{
-            break;
-        }
+    try {
+        // データベース接続
+        $pdo = new PDO('sqlite:calendar.db', '', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+
+        // トランザクション開始
+        $pdo->beginTransaction();
+
+        // データベース操作
+        setDatabase($pdo);
+
+        // コミット
+        $pdo->commit();
+        echo "Database operation successful.";
+    } catch (PDOException $e) {
+        // ロールバック
+        $pdo->rollBack();
+        echo "Database operation failed: " . $e->getMessage();
     }
-    print $result;
 
     function setDatabase($pdo) {
         $date = $_GET['id'];
         $content = $_GET['content'];
-    
-        // デバッグ: 変数の確認
-        var_dump($date, $content);
-    
+
+        // デバッグ用: 変数の確認
+        // error_log() はサーバーのエラーログに出力します
+        error_log("Date: " . $date);
+        error_log("Content: " . $content);
+
         // 日付に基づいて現在のエントリ数を確認
         $stmt = $pdo->prepare('SELECT count(date) FROM schedule WHERE date = :date');
         $stmt->bindValue(':date', $date, PDO::PARAM_STR);
         $stmt->execute();
         $num = $stmt->fetchColumn();
-    
-        // デバッグ: クエリ結果の確認
-        var_dump($num);
-    
+
+        // デバッグ用: クエリ結果の確認
+        error_log("Number of entries: " . $num);
+
         if ($num == 0 && $content != "") {
             // エントリが存在しない場合は挿入
             $stmt = $pdo->prepare('INSERT INTO schedule (date, title) VALUES (:date, :title)');
@@ -50,18 +46,16 @@
             // エントリが存在し、コンテンツが空の場合は削除
             $stmt = $pdo->prepare('DELETE FROM schedule WHERE date = :date');
         }
-    
+
         // 共通のバインド処理
         $stmt->bindValue(':date', $date, PDO::PARAM_STR);
         if ($content != "") {
             $stmt->bindValue(':title', $content, PDO::PARAM_STR);
         }
-    
+
         // クエリの実行
-        if ($stmt->execute()) {
-            echo "Database operation successful.";
-        } else {
-            echo "Failed to execute database operation.";
+        if (!$stmt->execute()) {
+            throw new Exception("Failed to execute database operation.");
         }
-    }    
+    }
 ?>

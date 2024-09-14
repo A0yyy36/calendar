@@ -37,6 +37,10 @@ function dateFormat(dt){
 }
 
 function draw(holiday, schedule) {
+
+    console.log('Holiday Data:', holiday); // 休日データの確認
+    console.log('Schedule Data:', schedule); // スケジュールデータの確認
+
     let title = '<nav>';
     title += '<div id="month-navigation">';
     title += '<span id="prev-month"> < </span>';
@@ -95,14 +99,15 @@ function draw(holiday, schedule) {
     });
 }
 
-function windowOpen(id){
+function windowOpen(id) {
     let url = 'calendarEdit.php?id=' + id;
     const left = (screen.width - 600) / 2;
     const top = (screen.height - 320) / 2;
-    window.open(url, null, 'width=600, height=320, top' + top + ',left=' + left);
+    window.open(url, null, 'width=600, height=320, top=' + top + ',left=' + left);
 }
 
-function windowClose(){
+
+function windowClose() {
     const id = $('#id').val();
     let content = $('#content').val(); // contentを取得
     content = content.replace(/\n/g, '<br>');
@@ -115,26 +120,32 @@ function windowClose(){
         type: 'get', 
         dataType: 'text', 
         data: {id: id, content: content}
-    }
+    };
 
-    $.ajax(ajaxParam).done(function(txt){
+    $.ajax(ajaxParam).done(function(txt) {
         console.log('Update response:', txt);
 
         let ary = id.split('-');
         let year = parseInt(ary[0]);
-        let month = parseInt(ary[1])-1;
+        let month = parseInt(ary[1]) - 1;
 
         console.log('Year:', year, 'Month:', month);
 
         if (window.opener && !window.opener.closed) {
+            console.log('親ウィンドウが利用可能です。');
             window.opener.drawCalendar(new Date(year, month, 1));
             console.log('親ウィンドウのカレンダーを更新しました。');
         } else {
             console.log('親ウィンドウが利用できません。');
         }
 
-        self.close(); // ウィンドウを閉じる試み
-        console.log('ウィンドウを閉じる操作が実行されました。');
+        // ウィンドウを閉じる処理
+        if (self.close) {
+            self.close();
+            console.log('ウィンドウを閉じる操作が実行されました。');
+        } else {
+            console.log('self.close() は利用できません。');
+        }
     }).fail(function(jqXHR, textStatus, errorThrown) {
         console.error('更新に失敗しました:', textStatus, errorThrown);
     });
