@@ -82,10 +82,14 @@ nav {
 }
 
 .sunday {
+    background-color: #ffe4e1;
+    border-color: red;
     color: red;
 }
 
 .saturday {
+    background-color: #e1e9ff;
+    border-color: blue;
     color: blue;
 }
 
@@ -94,8 +98,7 @@ nav {
 }
 
 .holiday {
-    background-color: #ffe4e1;
-    border-color: red;
+    
     color: red;
 }
 
