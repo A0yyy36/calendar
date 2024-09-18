@@ -44,19 +44,19 @@ nav {
 #youbi {
     font-size: 20px;
     display: flex;
-    justify-content: flex-start; /* 子要素を左寄せに配置 */
-    width: 107%; /* 親要素の幅を画面全体に設定 */
-    margin: 0; /* 親要素の左右の余白を削除 */
-    position: absolute; /* 親要素を絶対配置に */
-    left: 0; /* 画面の左端に固定 */
-    top: 33px; /* 必要に応じて上端に固定 */
+    justify-content: flex-start;
+    width: 107%;
+    margin: 0;
+    position: absolute;
+    left: 0;
+    top: 33px;
     padding-left: 55px;
     padding-bottom: 20px;
 }
 
 #youbi > div {
-    flex: 1; /* 各子要素が均等に幅を占める */
-    text-align: left; /* テキストを左揃えに */
+    flex: 1;
+    text-align: left;
 }
 
 #calendar {
@@ -70,14 +70,14 @@ nav {
 
 .day {
     font-size: 20px;
-    width: calc(100%/7-6px);
+    width: 100%;
     height: calc(100%/6-6px);
     background: white;
     border: 1px solid #ddd;
     border-radius: 3px;
     padding: 5px;
     display: flex;
-    height: 100px;
+    height: 89px;
     float: left;
 }
 
@@ -107,14 +107,28 @@ nav {
     margin-top: 5px;
 }
 
+/* 特定のスケジュールにholiday-textが含まれている場合のスタイル */
+.schedule-text.holiday-schedule {
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: flex-start; /* 左寄せに変更 */
+    align-items: center;
+    height: 80px;
+    unicode-bidi: isolate;
+    position: relative;
+    left: -15%; /* 左寄せ */
+}
+
+
 div.schedule-text {
     font-size: 20px;
     font-weight: bold;
     display: flex;
-    justify-content: center; /* 水平中央揃え */
-    align-items: center; /* 垂直中央揃え */
-    height: 100px; /* 必要に応じて高さを指定 */
+    justify-content: center;
+    align-items: center;
+    height: 80px;
     unicode-bidi: isolate;
-    position: relative; /* StaticからRelativeに変更 */
-    left: -2%;
+    position: relative;
+    left: 3%;
 }

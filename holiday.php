@@ -1,5 +1,4 @@
 <?php
-/*http://localhost/練習/html/第十章/10-6.html*/
     date_default_timezone_set('Asia/Tokyo');
     $start = $_GET['start'];
     $end = $_GET['end'];

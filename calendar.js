@@ -65,17 +65,30 @@ function draw(holiday, schedule) {
         if (i % 7 === 0) className += ' saturday';
         if (m !== month) className += ' other-month';
         let s = d;
+        let holidayFlag = false; // 休日があるかどうかのフラグ
+
+        // 休日のチェック
         for (let date in holiday) {
             if (date == dateFormat(day)) {
                 s += '&nbsp;<span class="holiday-text">' + holiday[date] + '</span>';
                 className += ' holiday';
+                holidayFlag = true; // 休日がある場合フラグをtrueに
             }
         }
+
+        // スケジュールのチェック
+        let scheduleHtml = "";
         for (let date in schedule) {
             if (date == dateFormat(day)) {
-                s += '<div class="schedule-text">' + schedule[date] + '</div>';
+                scheduleHtml = '<div class="schedule-text">' + schedule[date] + '</div>';
+                if (holidayFlag) {
+                    // holiday-textがある場合、schedule-textに特別なクラスを付与
+                    scheduleHtml = '<div class="schedule-text holiday-schedule">' + schedule[date] + '</div>';
+                }
             }
         }
+
+        s += scheduleHtml;
         html += '<div class="' + className + '" id="' + year + '-' + (m + 1) + '-' + d + '">';
         html += s;
         html += '</div>'
@@ -98,6 +111,8 @@ function draw(holiday, schedule) {
         windowClose();
     });
 }
+
+
 
 function windowOpen(id) {
     let url = 'calendarEdit.php?id=' + id;
