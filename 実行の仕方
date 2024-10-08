@@ -1,0 +1,11 @@
+実行の仕方
+http://localhost/%E9%96%8B%E7%99%BA/calendar/index.html
+
+データベースの使い方
+> cd C:\Users\Aoya36\OneDrive\デスクトップ\A0yyy\開発\calendar
+> \sqlite3\sqlite3
+> .open calendar.db
+> insert into schedule (date, title) values ('2024-09-24', '碧矢の誕生日');
+> select * from schedule;
+> delete from schedule where date = '2024-09-24';
+> .exit
