@@ -55,5 +55,5 @@
 - スケジュールを入れたい日にちをクリックして予定を入力する．
   ![schedule](img/Xmas.png)
 - OKボタンを押してカレンダーに予定が入力されているか確認する．
-  ![calendarB](img/calendar.png)
+  ![calendarB](img/calendarB.png)
 
