@@ -51,9 +51,9 @@
 ### 使用方法
 - XAMPPを起動してApacheをスタートする．
 - ローカルでホストされているWebページindex.htmlを開く．
-  ![calendar](https://github.com/A0yyy36/calendar/blob/main/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-09-16%20181944.png)
+  ![calendarA](img/calendarA.png)
 - スケジュールを入れたい日にちをクリックして予定を入力する．
-  ![schedule](https://github.com/A0yyy36/calendar/blob/main/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-09-16%20182028.png)
+  ![schedule](img/Xmas.png)
 - OKボタンを押してカレンダーに予定が入力されているか確認する．
-  ![OK](https://github.com/A0yyy36/calendar/blob/main/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%202024-09-16%20182054.png)
+  ![calendarB](img/calendar.png)
 
