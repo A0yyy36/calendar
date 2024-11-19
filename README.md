@@ -17,7 +17,7 @@
 - CSS
 - JavaScript
 - PHP
-- SQL
+- SQLite
 
 ### 使用ファイル
 - index.html
