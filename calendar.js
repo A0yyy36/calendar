@@ -1,35 +1,35 @@
 let year, month;
 
-$(function(){
+$(function () {
     drawCalendar(new Date());
 });
 
-function drawCalendar(now){
+function drawCalendar(now) {
     year = now.getFullYear();
     month = now.getMonth();
     const firstDay = new Date(year, month, 1);
     const start = dateFormat(new Date(year, month, 1 - firstDay.getDay()));
     const end = dateFormat(new Date(year, month, 1 - firstDay.getDay() + 41));
     const param1 = {
-        url: 'holiday.php', 
-        type: 'get', 
-        data: {start: start, end: end}, 
+        url: 'holiday.php',
+        type: 'get',
+        data: { start: start, end: end },
         dataType: 'json'
     };
-    $.ajax(param1).done(function(holiday){
+    $.ajax(param1).done(function (holiday) {
         const param2 = {
-            url: 'schedule.php', 
-            type: 'get', 
-            data: {start: start, end: end}, 
+            url: 'schedule.php',
+            type: 'get',
+            data: { start: start, end: end },
             dataType: 'json'
         };
-        $.ajax(param2).done(function(schedule){
+        $.ajax(param2).done(function (schedule) {
             draw(holiday, schedule);
         });
     });
 }
 
-function dateFormat(dt){
+function dateFormat(dt) {
     let year = dt.getFullYear();
     let month = dt.getMonth() + 1;
     let date = dt.getDate();
@@ -95,24 +95,22 @@ function draw(holiday, schedule) {
     }
     $('#calendar').html(html);
 
-    $('#prev-month').on('click', function(){
+    $('#prev-month').on('click', function () {
         drawCalendar(new Date(year, month - 1, 1));
     });
 
-    $('#next-month').on('click', function(){
+    $('#next-month').on('click', function () {
         drawCalendar(new Date(year, month + 1, 1));
     });
 
-    $('.day').on('click', function(){
+    $('.day').on('click', function () {
         windowOpen($(this).prop('id'));
     });
 
-    $('#ok-button').on('click', function(){
+    $('#ok-button').on('click', function () {
         windowClose();
     });
 }
-
-
 
 function windowOpen(id) {
     let url = 'calendarEdit.php?id=' + id;
@@ -120,7 +118,6 @@ function windowOpen(id) {
     const top = (screen.height - 320) / 2;
     window.open(url, null, 'width=600, height=320, top=' + top + ',left=' + left);
 }
-
 
 function windowClose() {
     const id = $('#id').val();
@@ -131,13 +128,13 @@ function windowClose() {
     console.log('Content:', content);
 
     const ajaxParam = {
-        url: 'calendarUpdate.php', 
-        type: 'get', 
-        dataType: 'text', 
-        data: {id: id, content: content}
+        url: 'calendarUpdate.php',
+        type: 'get',
+        dataType: 'text',
+        data: { id: id, content: content }
     };
 
-    $.ajax(ajaxParam).done(function(txt) {
+    $.ajax(ajaxParam).done(function (txt) {
         console.log('Update response:', txt);
 
         let ary = id.split('-');
@@ -161,7 +158,7 @@ function windowClose() {
         } else {
             console.log('self.close() は利用できません。');
         }
-    }).fail(function(jqXHR, textStatus, errorThrown) {
+    }).fail(function (jqXHR, textStatus, errorThrown) {
         console.error('更新に失敗しました:', textStatus, errorThrown);
     });
 }
